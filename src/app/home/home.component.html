@@ -1,0 +1,109 @@
+<div class="main">
+  <div class="mainNavBar">
+    <div class="logo">
+      <a routerLink="/home">To-Do</a>
+    </div>
+  </div>
+  <div class="row mainRow">
+    <div class="mainTabs col s6 m8">
+      <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col s3 teal-text text-lighten-2">
+                <a href="#test1">All To-Do's</a>
+              </li>
+              <li class="tab col s3"><a class="active" href="#test2">Pending</a></li>
+              <li class="tab col s3"><a href="#test3">Completed</a></li>
+              <li class="tab col s3"><a href="#test4">Important</a></li>
+            </ul>
+          </div>
+          <div id="test1" class="col s12">
+              <ul class="collapsible">
+                <li *ngFor="let todo of todos">
+                  <div class="collapsible-header"><i class="material-icons">assignment</i>{{todo.todo_name}}</div>
+                  <div class="collapsible-body"><span>{{todo.details}}</span></div>
+                </li>
+              </ul>
+          </div>
+          <div id="test2" class="col s12">
+            <ul class="collapsible">
+              <li *ngFor="let todo of todos; let i = index">
+                <ng-container *ngIf="todo.statusofTodo == 'pending'">
+                  <div class="collapsible-header">
+                    <i class="material-icons">assignment_late</i>{{todo.todo_name}}
+                    <!-- <div class="completeTodoName"></div>
+                    <div class="completeTodo">
+                      <a class="comp">Complete</a>
+                      <a class="markasImp" (click)="markTodoAsImportant(todo.id, i)">Mark as Important</a>
+                      <a class="deleteTodo">Delete</a>                      
+                    </div> -->
+                  </div>
+                  <div class="collapsible-body">
+                    <span>{{todo.details}}</span>
+                      <div class="todoMaintain">
+                        <div class="completeTodoName"></div>
+                        <div class="completeTodo">
+                        <a class="waves-effect green waves-light btn comp" (click)="completeTodo(todo._id, i)">Complete</a>
+                        <a class="waves-effect light-blue darken-2 waves-light btn markasImp" (click)="markTodoAsImportant(todo._id, i)">Mark as Important</a>
+                        <a class="waves-effect red waves-light btn deleteTodo">Delete</a>                      
+                      </div>
+                    </div> 
+                  </div>
+                </ng-container>
+              </li>
+            </ul>
+          </div>
+          <div id="test3" class="col s12">
+            <ul class="collapsible">
+                <li *ngFor="let todo of todos">
+                  <ng-container *ngIf="todo.statusofTodo == 'completed'">
+                    <div class="collapsible-header"><i class="material-icons">assignment_turned_in</i>{{todo.todo_name}}</div>
+                    <div class="collapsible-body">
+                      <span>{{todo.details}}</span>
+                    </div>
+                  </ng-container>
+                </li>
+            </ul>
+          </div>
+          <div id="test4" class="col s12">
+            <ul class="collapsible">
+              <li *ngFor="let todo of todos">
+                <ng-container *ngIf="todo.important == true">
+                  <div class="collapsible-header"><i class="material-icons">star</i>{{todo.todo_name}}</div>
+                  <div class="collapsible-body"><span>{{todo.details}}</span></div>
+                </ng-container>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="mainModal">
+    <!-- Modal Trigger -->
+    <a class="btn-floating btn-large waves-effect waves-light red fixedAddButton" (click)="addTodos()"><i class="material-icons">add</i></a>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+      <div class="modal-content">
+        <h5>Add Todo's</h5>
+        <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="first_name" type="text" #tname class="validate">
+                  <label for="first_name">Todo Name</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="last_name" type="text" #tdetails class="validate">
+                  <label for="last_name">Details</label>
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+        <a class="modal-action waves-effect waves-green btn-flat" (click)="addTodo(tname.value, tdetails.value)">Create</a>
+      </div>
+    </div>
+  </div>
+</div>

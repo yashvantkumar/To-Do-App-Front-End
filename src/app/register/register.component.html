@@ -1,0 +1,40 @@
+<div class="main">
+  <div class="nav">
+    <div class="logo">
+      To-Do
+    </div>
+  </div>
+  <div class="login">
+    <span class="loginTitle">Login</span>
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="fname" type="text" #fname class="validate">
+            <label for="fname">First Name</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="lname" type="text" #lname class="validate">
+            <label for="lname">Last Name</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="email" type="text" #email class="validate">
+            <label for="email">E-Mail</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="phone" type="text" #phone class="validate">
+            <label for="phone">Mobile number</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="password" type="password" #password class="validate">
+            <label for="password">password</label>
+          </div>
+        </div>
+        <a routerLink="/home" class="waves-effect waves-light btn " (click)="register(fname.value, lname.value, email.value, phone.value ,password.value)">Register</a>
+      </form>
+    </div>
+  </div>
+  <div class="newUser">
+    <a routerLink="/login">Already registered? Click here to Login.</a>
+  </div>
+</div>
